@@ -23,4 +23,4 @@ PRETRAINED_MODEL = {
 
 gender_list = ["Male", "Female"]
 
-padding = 50
+padding = 20

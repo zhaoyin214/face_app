@@ -45,5 +45,17 @@ PRETRAINED_MODEL_RETAIL_0044 = {
     # "scale_factor": 1.0
 }
 
+PRETRAINED_MODEL_RETAIL_0005_FP32 = {
+    "proto": "./face_detection/models/face-detection-retail-0005/FP32/face-detection-retail-0005.xml",
+    "weights": "./face_detection/models/face-detection-retail-0005/FP32/face-detection-retail-0005.bin",
+    "backend": "intel",
+    # "input_height": 300,
+    # "input_width": 300,
+    "swap_rb": False,
+    "crop": False,
+    # "mean": [104, 117, 123],
+    # "scale_factor": 1.0
+}
+
 THRESHOLD = 0.7
 

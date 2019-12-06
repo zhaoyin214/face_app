@@ -1,4 +1,5 @@
-from configs.app_face_detection_config import PRETRAINED_MODEL_RES10, PRETRAINED_MODEL_OPENCV, THRESHOLD
+from configs.app_face_detection_config import THRESHOLD, \
+    PRETRAINED_MODEL_RES10, PRETRAINED_MODEL_OPENCV, PRETRAINED_MODEL_RETAIL_0044
 from configs.app_age_prediction_config import PRETRAINED_MODEL as PRETRAINED_MODEL_AGE
 from face_detection import face_detector
 from age_prediction import age_predictor
@@ -11,7 +12,7 @@ if __name__ == "__main__":
     image = cv2.imread(filename="./img/amanda_bynes.jpg")
 
     image_marked, face_bboxes, t_elapsed = face_detector(
-        image=image, pretrained_model=PRETRAINED_MODEL_RES10, threshold=THRESHOLD,
+        image=image, pretrained_model=PRETRAINED_MODEL_RETAIL_0044, threshold=THRESHOLD,
         output_path=output_path
     )
     print("face bboxes: ", face_bboxes)
