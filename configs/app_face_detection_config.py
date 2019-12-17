@@ -57,5 +57,5 @@ PRETRAINED_MODEL_RETAIL_0005_FP32 = {
     # "scale_factor": 1.0
 }
 
-THRESHOLD = 0.7
+THRESHOLD = 0.88
 

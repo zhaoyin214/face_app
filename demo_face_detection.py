@@ -9,6 +9,8 @@ import cv2
 if __name__ == "__main__":
 
     output_path = "./output/out.jpg"
+    # image = cv2.imread(filename="./img/190.jpg")
+    # image = cv2.imread(filename="./img/29.jpg")
     image = cv2.imread(filename="./img/13f44c7a-fde1-4a73-9a73-aba5f374f7f3.jpg")
     image_marked, face_bboxes, t_elapsed = face_detector(
         image=image, pretrained_model=PRETRAINED_MODEL_RETAIL_0005_FP32, threshold=THRESHOLD,

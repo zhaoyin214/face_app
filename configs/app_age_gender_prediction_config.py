@@ -19,7 +19,7 @@ PRETRAINED_MODEL = {
     "crop": False,
     "mean": [0, 0, 0],
     "scale_factor": 1.0,
-    "padding": 30,
+    "padding": 0.2,
     "age_layer": "age_conv3",
     "age_scale": 100,
     "gender_layer": "prob",

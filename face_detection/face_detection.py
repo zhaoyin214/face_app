@@ -69,14 +69,20 @@ class FaceDetector(Net):
             conf = output[0, 0, i, 2]
             if conf > threshold:
                 x_min = int(output[0, 0, i, 3] * image_width)
-                y_min = int(output[0, 0, i, 4] * image_height)
+                y_min = int(output[0, 0, i, 6] * image_height)
                 x_max = int(output[0, 0, i, 5] * image_width)
-                y_max = int(output[0, 0, i, 6] * image_height)
+                y_max = int(output[0, 0, i, 4] * image_height)
 
                 bboxes.append([x_min, y_min, x_max, y_max])
                 cv2.rectangle(
                     img=image, pt1=(x_min, y_min), pt2=(x_max, y_max),
                     color=(0, 255, 0), thickness=2, lineType=cv2.LINE_AA
+                )
+                cv2.putText(
+                    img=image, text="{:.3f}".format(conf),
+                    org=(x_min, y_max),
+                    fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.5,
+                    color=(0, 255, 255), thickness=1, lineType=cv2.LINE_AA
                 )
 
         cv2.imwrite(output_path, image)

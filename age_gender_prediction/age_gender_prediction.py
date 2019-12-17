@@ -37,7 +37,7 @@ class AgeGenderPredictor(Net):
 
     def predict(self, image, bboxes, output_path):
 
-        image_height, image_width = image.shape[0 : 2]
+        # image_height, image_width = image.shape[0 : 2]
 
         t_net = time.time()
         ages = []
@@ -45,18 +45,19 @@ class AgeGenderPredictor(Net):
 
         for bbox in bboxes:
 
-            roi = image[
-                np.max(
-                    [0, bbox[1] - self._padding]
-                ) : np.min(
-                    [bbox[3] + self._padding, image_height - 1]
-                ),
-                np.max(
-                    [0, bbox[0] - self._padding]
-                ) : np.min(
-                    [bbox[2] + self._padding, image_width - 1]
-                ), :
-            ]
+            # roi = image[
+            #     np.max(
+            #         [0, bbox[1] - self._padding]
+            #     ) : np.min(
+            #         [bbox[3] + self._padding, image_height - 1]
+            #     ),
+            #     np.max(
+            #         [0, bbox[0] - self._padding]
+            #     ) : np.min(
+            #         [bbox[2] + self._padding, image_width - 1]
+            #     ), :
+            # ]
+            roi = self._roi(image, bbox)
 
             if not roi.size:
                 continue
@@ -90,6 +91,32 @@ class AgeGenderPredictor(Net):
         print("time : {:.3f}".format(t_net))
 
         return image, ages, genders, t_net
+
+    def _roi(self, image, bbox):
+
+        image_height, image_width = image.shape[0 : 2]
+        aspect_ratio = self._input_width / self._input_height
+        box_width = bbox[3] - bbox[1] + 1
+        box_height = bbox[2] - bbox[0] + 1
+        padding_y = int(box_height * self._padding / 2)
+        padding_x = int(
+            ((box_height + 2 * padding_y) * aspect_ratio - box_width) / 2
+        )
+
+        roi = image[
+            np.max(
+                [0, bbox[1] - padding_y]
+            ) : np.min(
+                [bbox[3] + 1 + padding_y, image_height]
+            ),
+            np.max(
+                [0, bbox[0] - padding_x]
+            ) : np.min(
+                [bbox[2] + 1 + padding_x, image_width]
+            ), :
+        ]
+
+        return roi
 
     def __call__(self, image, bboxes, output_path):
 
